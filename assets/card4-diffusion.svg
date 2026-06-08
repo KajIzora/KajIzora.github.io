@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#fafaf7" />
+
+  <!-- Plot area grid -->
+  <line x1="30" y1="20" x2="30" y2="160" stroke="#e2e2da" stroke-width="1" />
+  <line x1="30" y1="160" x2="290" y2="160" stroke="#e2e2da" stroke-width="1" />
+
+  <!-- Time Axis Label -->
+  <text x="18" y="25" font-family="Inter, sans-serif" font-size="7" fill="#5c5c56" text-anchor="end">t = 1.0 (Noise)</text>
+  <text x="18" y="163" font-family="Inter, sans-serif" font-size="7" fill="#5c5c56" text-anchor="end">t = 0.0 (Target)</text>
+  <line x1="22" y1="20" x2="26" y2="20" stroke="#5c5c56" stroke-width="1" />
+  <line x1="22" y1="160" x2="26" y2="160" stroke="#5c5c56" stroke-width="1" />
+
+  <!-- Flow Paths / Trajectories (Diffusing) -->
+  <g stroke-linecap="round" fill="none">
+    <!-- Paths going to Left Mode (around x=100) -->
+    <path d="M 60 20 Q 55 70, 70 110 T 95 160" stroke="#5c5c56" stroke-opacity="0.2" stroke-width="1" />
+    <path d="M 110 20 Q 95 60, 90 100 T 98 160" stroke="#2e5036" stroke-opacity="0.3" stroke-width="1.2" />
+    <path d="M 140 20 Q 115 70, 100 110 T 102 160" stroke="#2e5036" stroke-opacity="0.5" stroke-width="1.5" />
+    <path d="M 170 20 Q 145 60, 110 110 T 105 160" stroke="#2e5036" stroke-opacity="0.4" stroke-width="1.2" />
+    
+    <!-- Paths going to Right Mode (around x=220) -->
+    <path d="M 150 20 Q 175 60, 205 110 T 215 160" stroke="#2e5036" stroke-opacity="0.4" stroke-width="1.2" />
+    <path d="M 180 20 Q 205 70, 220 110 T 222 160" stroke="#2e5036" stroke-opacity="0.5" stroke-width="1.5" />
+    <path d="M 220 20 Q 235 60, 230 100 T 226 160" stroke="#2e5036" stroke-opacity="0.3" stroke-width="1.2" />
+    <path d="M 270 20 Q 275 70, 250 110 T 229 160" stroke="#5c5c56" stroke-opacity="0.2" stroke-width="1" />
+  </g>
+
+  <!-- Noise points at the top -->
+  <g fill="#5c5c56" opacity="0.6">
+    <circle cx="60" cy="20" r="1.5" />
+    <circle cx="85" cy="20" r="1.5" />
+    <circle cx="110" cy="20" r="1.5" />
+    <circle cx="140" cy="20" r="1.5" />
+    <circle cx="150" cy="20" r="1.5" />
+    <circle cx="170" cy="20" r="1.5" />
+    <circle cx="180" cy="20" r="1.5" />
+    <circle cx="205" cy="20" r="1.5" />
+    <circle cx="220" cy="20" r="1.5" />
+    <circle cx="245" cy="20" r="1.5" />
+    <circle cx="270" cy="20" r="1.5" />
+  </g>
+
+  <!-- Mode Target Distribution Curve at the bottom (t=0) -->
+  <!-- We draw a double-Gaussian curve resting on the x-axis -->
+  <path d="M 30 160 L 60 160 Q 80 160, 90 145 T 100 130 T 110 145 T 130 160 L 180 160 Q 200 160, 210 140 T 223 125 T 235 140 T 255 160 L 290 160" 
+        fill="#2e5036" fill-opacity="0.1" stroke="#2e5036" stroke-width="1.5" />
+  
+  <circle cx="101" cy="130" r="2" fill="#2e5036" />
+  <circle cx="223" cy="125" r="2" fill="#2e5036" />
+
+  <!-- Labels -->
+  <text x="101" y="122" font-family="Inter, sans-serif" font-size="6" font-weight="600" fill="#2e5036" text-anchor="middle">Mode A</text>
+  <text x="223" y="117" font-family="Inter, sans-serif" font-size="6" font-weight="600" fill="#2e5036" text-anchor="middle">Mode B</text>
+  
+  <!-- Axis label -->
+  <text x="160" y="178" font-family="Inter, sans-serif" font-size="8" fill="#5c5c56" text-anchor="middle">State Space (x)</text>
+  <text x="15" y="90" font-family="Inter, sans-serif" font-size="8" fill="#5c5c56" text-anchor="middle" transform="rotate(-90 15 90)">Diffusion Time (t)</text>
+</svg>

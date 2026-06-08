@@ -1,0 +1,16 @@
+.DS_Store
+
+# Editor / agent config
+.cursor/
+.claude/
+.agents/
+
+# Local notes
+CommandLine.md
+misc.txt
+website_layout_plan.md
+
+# Unused large source videos (site uses G1-loop.mp4)
+assets2/G1-clip-2.gif
+assets2/G1-full-vid.MOV
+assets2/G1-clip.mov

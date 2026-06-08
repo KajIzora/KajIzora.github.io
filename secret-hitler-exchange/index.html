@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two-channel exchange — public speech vs. private reasoning</title>
+<!--
+  Self-contained animated component for the "Multi-agent LLM simulation of
+  Secret Hitler" card. Fuses two ideas:
+    (1) a two-channel chat — what an agent SAYS (public, accent) vs. what it
+        THINKS (private chain-of-thought, muted italic);
+    (2) a trust meter — group trust toward each player erodes in real time.
+  No build step, no dependencies. Drop the folder in, embed via <iframe>, or
+  open index.html directly. Edit the BEATS array below to swap in real logs.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-color: #fafaf7;
+    --text-primary: #1c1c1a;
+    --text-secondary: #5c5c56;
+    --accent-color: #2e5036;
+    --accent-light: #eef3ef;
+    --border-color: #e2e2da;
+    --danger: #9a3b2e;       /* trust erosion, used sparingly */
+    --font-serif: "EB Garamond", Georgia, serif;
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-serif);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  /* The stage uses a container query unit so type scales with the card. */
+  .stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    container-type: size;
+    display: flex;
+    flex-direction: column;
+    padding: 4.2cqw 4.6cqw;
+    gap: 3cqh;
+    overflow: hidden;
+  }
+
+  /* ---- Header strip ---- */
+  .hdr {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    font-family: var(--font-sans);
+    flex: 0 0 auto;
+  }
+  .hdr .game {
+    font-size: 3.1cqw;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+  .hdr .round {
+    font-size: 2.8cqw;
+    color: var(--text-secondary);
+    opacity: 0.8;
+  }
+
+  /* ---- Scene: the active exchange ---- */
+  .scene {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .beat {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2.4cqh;
+    opacity: 0;
+    transform: translateY(2.2cqh);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+    pointer-events: none;
+  }
+  .beat.active { opacity: 1; transform: translateY(0); }
+
+  .speaker {
+    font-family: var(--font-sans);
+    font-size: 3cqw;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 1.4cqw;
+  }
+  .speaker .dot {
+    width: 1.9cqw; height: 1.9cqw;
+    border-radius: 50%;
+    flex: 0 0 auto;
+  }
+  .faction-F { color: var(--accent-color); }
+  .faction-F .dot { background: var(--accent-color); }
+  .faction-L { color: var(--text-secondary); }
+  .faction-L .dot { background: transparent; border: 0.4cqw solid var(--text-secondary); }
+
+  /* Public line: what is said aloud */
+  .said {
+    font-size: 5cqw;
+    line-height: 1.32;
+    color: var(--text-primary);
+    position: relative;
+    padding-left: 3.4cqw;
+  }
+  .said::before {
+    content: "";
+    position: absolute; left: 0; top: 0.7em;
+    width: 1.6cqw; height: 1.6cqw;
+    border-radius: 50%;
+    background: var(--accent-color);
+    transform: translateY(-50%);
+  }
+
+  /* Private line: chain-of-thought, never spoken */
+  .thought {
+    font-style: italic;
+    font-size: 3.9cqw;
+    line-height: 1.34;
+    color: var(--text-secondary);
+    border-left: 0.5cqw dashed var(--border-color);
+    padding-left: 3cqw;
+    margin-left: 0.8cqw;
+    position: relative;
+  }
+  .thought .tlabel {
+    display: block;
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-size: 2.4cqw;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--border-color);
+    margin-bottom: 0.8cqh;
+  }
+
+  /* Caption beats (setup / result) */
+  .beat.caption { text-align: center; align-items: center; }
+  .beat.caption .cap {
+    font-size: 4.4cqw;
+    line-height: 1.4;
+    color: var(--text-primary);
+    max-width: 86%;
+  }
+  .beat.caption .cap em { color: var(--accent-color); font-style: italic; }
+  .beat.caption.result .cap { font-size: 4cqw; }
+
+  /* ---- Trust rail ---- */
+  .rail {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5cqh;
+    padding-top: 2.6cqh;
+    margin-bottom: 6.5cqh;   /* raise the rail, free space below for controls */
+    border-top: 1px solid var(--border-color);
+  }
+  .rail-head {
+    font-family: var(--font-sans);
+    font-size: 2.5cqw;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    opacity: 0.75;
+  }
+  .players {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3.5cqw;
+    position: relative;
+  }
+  .player { display: flex; flex-direction: column; gap: 1cqh; }
+  .player .name {
+    font-family: var(--font-sans);
+    font-size: 2.8cqw;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    display: flex; align-items: center; gap: 1.2cqw;
+    color: var(--text-primary);
+  }
+  .player .name .fac {
+    font-size: 2.2cqw; font-weight: 700;
+    color: var(--text-secondary); opacity: 0.6;
+  }
+  .player.speaking .name { color: var(--accent-color); }
+  .bar {
+    height: 1.7cqh;
+    min-height: 5px;
+    background: var(--border-color);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .bar .fill {
+    height: 100%;
+    width: 70%;
+    background: var(--accent-color);
+    border-radius: 99px;
+    transition: width 0.9s cubic-bezier(.4,0,.2,1), background-color 0.9s ease;
+  }
+  .player.eroded .fill { background: var(--danger); }
+
+  /* Tacit-coordination link between two players */
+  .tacit {
+    position: absolute;
+    bottom: -1.2cqh;
+    height: 0;
+    border-top: 0.5cqw dashed var(--accent-color);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .tacit.show { opacity: 0.85; animation: tacitPulse 1.6s ease-in-out infinite; }
+  .tacit .tlab {
+    position: absolute;
+    top: 0.6cqh; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-sans);
+    font-size: 2.2cqw;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    white-space: nowrap;
+    background: var(--bg-color);
+    padding: 0 1.2cqw;
+  }
+  @keyframes tacitPulse { 0%,100% { opacity: 0.35; } 50% { opacity: 0.9; } }
+
+  /* ---- Controls ---- */
+  .controls {
+    position: absolute;
+    bottom: 1.4cqw; right: 3cqw;
+    display: flex; align-items: center; gap: 2cqw;
+    font-family: var(--font-sans);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .stage:hover .controls, .controls.show { opacity: 1; }
+  .controls button {
+    font-family: var(--font-sans);
+    font-size: 2.1cqw;
+    color: var(--text-secondary);
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 99px;
+    padding: 0.4cqh 1.8cqw;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .controls button:hover { color: var(--accent-color); border-color: var(--accent-color); }
+
+  .progress {
+    position: absolute;
+    top: 0; left: 0; height: 2px;
+    background: var(--accent-color);
+    width: 0;
+    opacity: 0.5;
+  }
+
+  /* On very wide standalone view, cap type so it doesn't get gigantic. */
+  @container (min-width: 760px) {
+    .said { font-size: 38px; }
+    .thought { font-size: 30px; }
+    .speaker, .hdr .game { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="progress" id="progress"></div>
+
+    <div class="hdr">
+      <span class="game">Secret&nbsp;Hitler · multi-agent LLM</span>
+      <span class="round" id="round">Round 4</span>
+    </div>
+
+    <div class="scene" id="scene"><!-- beats injected --></div>
+
+    <div class="rail">
+      <span class="rail-head">Group trust</span>
+      <div class="players" id="players">
+        <div class="player" data-key="dave">
+          <span class="name">Dave <span class="fac">F</span></span>
+          <div class="bar"><div class="fill"></div></div>
+        </div>
+        <div class="player" data-key="eve">
+          <span class="name">Eve <span class="fac">L</span></span>
+          <div class="bar"><div class="fill"></div></div>
+        </div>
+        <div class="player" data-key="bob">
+          <span class="name">Bob <span class="fac">F</span></span>
+          <div class="bar"><div class="fill"></div></div>
+        </div>
+        <div class="tacit" id="tacit"><span class="tlab">tacit alignment</span></div>
+      </div>
+    </div>
+
+    <div class="controls" id="controls">
+      <button id="replay">Replay</button>
+    </div>
+  </div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---- Script. Edit freely; swap in real transcript lines later. -----------
+  // type: "caption" | "exchange"
+  // For "exchange": speaker, faction (F/L), said (public), thought (private).
+  // trust: target group-trust values after the beat (0..100). Omit a key to hold.
+  // tacit: true -> show the Dave<->Bob tacit-coordination link.
+  // speaking: key to highlight in the rail.
+  const BEATS = [
+    {
+      type: "caption", dur: 3200,
+      cap: "Round 4. <em>Dave</em> is President, <em>Eve</em> is Chancellor. He draws three policies and must pass two on."
+    },
+    {
+      type: "exchange", dur: 5200, speaker: "Dave", faction: "F", speaking: "dave",
+      said: "I drew one Liberal and two Fascist. I'll discard the Fascist and pass the rest.",
+      thought: "Actually: discard the Liberal, pass two Fascists to Eve — then claim I tossed a Fascist to look trustworthy."
+    },
+    {
+      type: "exchange", dur: 5000, speaker: "Eve", faction: "L", speaking: "eve",
+      said: "I received two Fascist policies. I had no choice — I enacted one.",
+      thought: "I'm telling the truth. But my account contradicts Dave's, and the table is looking at me.",
+      trust: { eve: 45 }
+    },
+    {
+      type: "exchange", dur: 5400, speaker: "Bob", faction: "F", speaking: "bob",
+      said: "Eve's story doesn't line up with Dave's. I'm inclined to trust Dave here.",
+      thought: "Dave passed two Fascists on purpose. This confusion helps us. Back him just enough — not enough to implicate myself.",
+      trust: { eve: 28 }, tacit: true
+    },
+    {
+      type: "exchange", dur: 5000, speaker: "Dave", faction: "F", speaking: "dave",
+      said: "I'd never burn a Liberal policy. Eve must have made a mistake — or worse.",
+      thought: "The discrepancy diverts attention from me. Bob's support buys us time.",
+      trust: { eve: 18, dave: 76 }, tacit: true
+    },
+    {
+      type: "caption", result: true, dur: 6000,
+      cap: "Fascist policy enacted. Trust in <em>Eve</em> collapses — with no explicit coordination between Dave and Bob."
+    }
+  ];
+
+  const TRUST0 = { dave: 70, eve: 70, bob: 66 };
+
+  // ---- Build beat DOM -------------------------------------------------------
+  const scene = document.getElementById("scene");
+  const beatEls = BEATS.map(function (b) {
+    const el = document.createElement("div");
+    el.className = "beat" + (b.type === "caption" ? " caption" + (b.result ? " result" : "") : "");
+    if (b.type === "caption") {
+      el.innerHTML = '<p class="cap">' + b.cap + "</p>";
+    } else {
+      el.innerHTML =
+        '<div class="speaker faction-' + b.faction + '"><span class="dot"></span>' + b.speaker + "</div>" +
+        '<div class="said">' + b.said + "</div>" +
+        '<div class="thought"><span class="tlabel">Private reasoning · not spoken</span>' + b.thought + "</div>";
+    }
+    scene.appendChild(el);
+    return el;
+  });
+
+  // ---- Rail state -----------------------------------------------------------
+  const players = {};
+  document.querySelectorAll(".player").forEach(function (p) {
+    players[p.dataset.key] = { el: p, fill: p.querySelector(".fill") };
+  });
+  const tacit = document.getElementById("tacit");
+  const tacitLab = tacit.querySelector(".tlab");
+  const progress = document.getElementById("progress");
+  const roundEl = document.getElementById("round");
+
+  function setTrust(values) {
+    Object.keys(values).forEach(function (k) {
+      const v = values[k];
+      players[k].fill.style.width = v + "%";
+      players[k].el.classList.toggle("eroded", v < 40);
+    });
+  }
+  function resetTrust() {
+    setTrust(TRUST0);
+    Object.values(players).forEach(function (p) { p.el.classList.remove("speaking", "eroded"); });
+    setTrust(TRUST0);
+  }
+
+  // Position the tacit link to span Dave's and Bob's columns (1st and 3rd).
+  function placeTacit() {
+    const wrap = document.getElementById("players");
+    const a = players.dave.el, b = players.bob.el;
+    const wr = wrap.getBoundingClientRect();
+    const ar = a.getBoundingClientRect(), br = b.getBoundingClientRect();
+    const left = (ar.left + ar.width / 2) - wr.left;
+    const right = (br.left + br.width / 2) - wr.left;
+    tacit.style.left = left + "px";
+    tacit.style.width = (right - left) + "px";
+  }
+  window.addEventListener("resize", placeTacit);
+
+  // ---- Timeline -------------------------------------------------------------
+  // Pause/resume preserve elapsed time within the current beat: we track how
+  // much of the beat remains and restart only that remainder on resume.
+  let idx = -1, timer = null, raf = null, running = false, paused = false;
+  let beatDur = 0, beatRemaining = 0, segStart = 0;
+
+  function clearTimers() {
+    if (timer) { clearTimeout(timer); timer = null; }
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+  }
+
+  // Set the visuals for beat i (no timing).
+  function showBeat(i) {
+    beatEls.forEach(function (el, j) { el.classList.toggle("active", j === i); });
+    const b = BEATS[i];
+    Object.values(players).forEach(function (p) { p.el.classList.remove("speaking"); });
+    if (b.speaking && players[b.speaking]) players[b.speaking].el.classList.add("speaking");
+    if (b.trust) setTrust(b.trust);
+    placeTacit();
+    tacit.classList.toggle("show", !!b.tacit);
+  }
+
+  // Drive the progress bar, accounting for time already elapsed in this beat.
+  function runProgress() {
+    if (raf) cancelAnimationFrame(raf);
+    const elapsedBefore = beatDur - beatRemaining;
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min(1, (elapsedBefore + (now - start)) / beatDur);
+      progress.style.width = (t * 100) + "%";
+      if (t < 1 && running && !paused) raf = requestAnimationFrame(tick);
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  // (Re)start the timeout + progress for whatever time is left in this beat.
+  function startSegment() {
+    clearTimers();
+    segStart = performance.now();
+    timer = setTimeout(gotoNext, beatRemaining);
+    runProgress();
+  }
+
+  function gotoNext() {
+    idx++;
+    if (idx >= BEATS.length) {            // hold final, then loop
+      timer = setTimeout(restart, 1800);
+      return;
+    }
+    showBeat(idx);
+    beatDur = BEATS[idx].dur;
+    beatRemaining = beatDur;
+    startSegment();
+  }
+
+  function restart() {
+    clearTimers();
+    paused = false;
+    idx = -1;
+    resetTrust();
+    tacit.classList.remove("show");
+    progress.style.width = "0";
+    gotoNext();
+  }
+
+  function play() { if (!running) { running = true; restart(); } }
+  function stop() { running = false; paused = false; clearTimers(); }
+
+  function pauseTimeline() {
+    if (!running || paused) return;
+    paused = true;
+    beatRemaining = Math.max(0, beatRemaining - (performance.now() - segStart));
+    clearTimers();
+  }
+  function resumeTimeline() {
+    if (!running || !paused) return;
+    paused = false;
+    startSegment();
+  }
+
+  document.getElementById("replay").addEventListener("click", restart);
+
+  // Pause on hover so a reviewer can read; resume from where it left off.
+  const stage = document.getElementById("stage");
+  stage.addEventListener("mouseenter", pauseTimeline);
+  stage.addEventListener("mouseleave", resumeTimeline);
+
+  // Autoplay only when scrolled into view (nice for embedding).
+  resetTrust();
+  showBeat(0); // static first frame before play
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) play(); else stop();
+      });
+    }, { threshold: 0.35 });
+    io.observe(stage);
+  } else {
+    play();
+  }
+})();
+</script>
+</body>
+</html>

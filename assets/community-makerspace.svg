@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#fafaf7" />
+
+  <!-- Grid (faint) -->
+  <g stroke="#f4f4f0" stroke-width="1">
+    <line x1="0" y1="50" x2="800" y2="50" />
+    <line x1="0" y1="100" x2="800" y2="100" />
+    <line x1="0" y1="150" x2="800" y2="150" />
+    <line x1="0" y1="200" x2="800" y2="200" />
+    <line x1="0" y1="250" x2="800" y2="250" />
+    
+    <line x1="100" y1="0" x2="100" y2="300" />
+    <line x1="200" y1="0" x2="200" y2="300" />
+    <line x1="300" y1="0" x2="300" y2="300" />
+    <line x1="400" y1="0" x2="400" y2="300" />
+    <line x1="500" y1="0" x2="500" y2="300" />
+    <line x1="600" y1="0" x2="600" y2="300" />
+    <line x1="700" y1="0" x2="700" y2="300" />
+  </g>
+
+  <!-- Table/Workbench Line -->
+  <line x1="50" y1="220" x2="750" y2="220" stroke="#1c1c1a" stroke-width="2" />
+  <!-- Workbench legs -->
+  <line x1="80" y1="220" x2="80" y2="280" stroke="#1c1c1a" stroke-width="2" />
+  <line x1="720" y1="220" x2="720" y2="280" stroke="#1c1c1a" stroke-width="2" />
+
+  <!-- Left Side: 3D Printer Frame -->
+  <g transform="translate(120, 60)" stroke="#5c5c56" stroke-width="1.5" fill="none">
+    <!-- Outer Frame Box -->
+    <rect x="0" y="0" width="100" height="150" stroke="#1c1c1a" stroke-width="2" />
+    
+    <!-- Z axis rods -->
+    <line x1="20" y1="5" x2="20" y2="145" stroke-width="1" />
+    <line x1="80" y1="5" x2="80" y2="145" stroke-width="1" />
+    
+    <!-- X axis carriage -->
+    <line x1="0" y1="80" x2="100" y2="80" stroke="#2e5036" stroke-width="2.5" />
+    <!-- Extruder carriage block -->
+    <rect x="42" y="72" width="16" height="16" fill="#fafaf7" stroke="#2e5036" stroke-width="1.5" />
+    <!-- Filament nozzle spool simulation line -->
+    <path d="M 50 72 L 50 15 Q 60 5, 80 5" stroke="#2e5036" stroke-width="1" stroke-dasharray="2 1" />
+    
+    <!-- Heated bed -->
+    <rect x="15" y="130" width="70" height="8" rx="1" fill="#eef3ef" stroke="#1c1c1a" stroke-width="1" />
+    <!-- Printed object on bed (small 3D shape blueprint) -->
+    <polygon points="40,130 50,110 60,130" fill="#2e5036" fill-opacity="0.2" stroke="#2e5036" stroke-width="1.2" />
+  </g>
+  <text x="170" y="235" font-family="Inter, sans-serif" font-size="8" fill="#5c5c56" text-anchor="middle">3D PROTOTYPING</text>
+
+  <!-- Middle: Oscilloscope & Electronics Bench -->
+  <g transform="translate(290, 110)">
+    <!-- O-scope chassis -->
+    <rect x="0" y="20" width="120" height="80" rx="2" fill="none" stroke="#1c1c1a" stroke-width="2" />
+    <rect x="5" y="25" width="70" height="60" rx="1" fill="#eef3ef" stroke="#2e5036" stroke-width="1" />
+    
+    <!-- O-scope controls -->
+    <circle cx="88" cy="35" r="4" fill="none" stroke="#1c1c1a" stroke-width="1" />
+    <circle cx="102" cy="35" r="4" fill="none" stroke="#1c1c1a" stroke-width="1" />
+    <circle cx="88" cy="50" r="3" fill="none" stroke="#1c1c1a" stroke-width="1" />
+    <circle cx="102" cy="50" r="3" fill="none" stroke="#1c1c1a" stroke-width="1" />
+    <rect x="83" y="65" width="24" height="25" rx="1" fill="none" stroke="#5c5c56" stroke-width="0.8" />
+    
+    <!-- Waveform on screen -->
+    <path d="M 5 60 Q 20 28, 30 60 T 55 60 T 75 40" fill="none" stroke="#2e5036" stroke-width="1.8" />
+    
+    <!-- Probe leads -->
+    <path d="M 95 85 Q 120 120, 160 110" fill="none" stroke="#5c5c56" stroke-dasharray="2 2" stroke-width="1" />
+  </g>
+  <text x="350" y="235" font-family="Inter, sans-serif" font-size="8" fill="#5c5c56" text-anchor="middle">ELECTRONICS WORKSTATION</text>
+
+  <!-- Right Side: Robotic Arm Linkage -->
+  <g transform="translate(500, 50)" stroke="#1c1c1a" stroke-width="2" fill="none" stroke-linecap="round">
+    <!-- Robotic Arm base -->
+    <rect x="75" y="150" width="50" height="20" rx="2" stroke-width="2" />
+    <circle cx="100" cy="150" r="10" stroke-width="1.5" />
+    
+    <!-- Lower link -->
+    <line x1="100" y1="150" x2="140" y2="70" stroke="#2e5036" stroke-width="3" />
+    <circle cx="140" cy="70" r="8" fill="#fafaf7" stroke="#1c1c1a" stroke-width="2" />
+    
+    <!-- Upper link -->
+    <line x1="140" y1="70" x2="220" y2="80" stroke="#2e5036" stroke-width="2.5" />
+    <circle cx="220" cy="80" r="6" fill="#fafaf7" stroke="#1c1c1a" stroke-width="1.5" />
+    
+    <!-- Wrist & End effector / Gripper -->
+    <line x1="220" y1="80" x2="245" y2="95" stroke-width="1.5" />
+    <!-- Gripper claws -->
+    <path d="M 245 95 L 250 85 M 245 95 L 252 103" stroke-width="1.5" />
+
+    <!-- Motion arc projection -->
+    <path d="M 140 70 A 80 80 0 0 1 220 80" stroke="#2e5036" stroke-opacity="0.3" stroke-dasharray="3 3" stroke-width="1" />
+  </g>
+  <text x="600" y="235" font-family="Inter, sans-serif" font-size="8" fill="#5c5c56" text-anchor="middle">ROBOTICS INTEGRATION</text>
+</svg>

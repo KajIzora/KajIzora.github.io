@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaj Hansteen Izora — Robotics & Embodied AI Researcher</title>
+  <meta name="description" content="Personal portfolio and research website of Kaj Hansteen Izora, a robotics researcher focusing on uncertainty-aware embodied intelligence, simulation-based inference, and robot perception.">
+  
+  <!-- Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- SECTION 1: HERO -->
+  <section id="hero">
+    <div class="container-wide">
+      <div class="hero-layout">
+        <!-- Hero Text -->
+        <div class="hero-text">
+          <h1>Kaj Hansteen Izora</h1>
+          <p class="hero-tagline">
+            Robotics researcher working on uncertainty-aware embodied intelligence — perception and inference systems for robots that maintain calibrated beliefs and transfer reliably from simulation to the real world.
+          </p>
+          <div class="link-row">
+            <a href="https://github.com/kajizora" target="_blank" rel="noopener noreferrer" id="hero-github">GitHub</a>
+            <span style="color: var(--border-color)">·</span>
+            <a href="https://linkedin.com/in/kaj-izora" target="_blank" rel="noopener noreferrer" id="hero-linkedin">LinkedIn</a>
+            <span style="color: var(--border-color)">·</span>
+            <a href="mailto:kaj@izora.com" id="hero-email">Email</a>
+          </div>
+        </div>
+        <!-- Hero Visual -->
+        <div class="hero-visual">
+          <img src="assets2/kaj.jpeg" alt="Kaj Hansteen Izora" id="hero-img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: ABOUT -->
+  <section id="about">
+    <div class="container">
+      <h2>About</h2>
+      <div class="about-layout">
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              I am an Associate Physical AI Engineer at Rose City Robotics, focusing on real-world robot learning and robust estimation. My research centers on Bayesian perception, simulation-based inference, and continuous normalizing flows to build robots that can reason under uncertainty.
+            </p>
+            <p>
+              Previously, I was a 2025 NSF RTG Fellow working on Bayesian state estimation for automated EV battery disassembly. I graduated with a B.S. in Computer Science from Portland State University in 2025, where my work on multi-agent LLM simulations was published in the <i>Northeast Journal of Complex Systems</i>. 
+            </p>
+            <p>
+              Looking forward, I plan to start my PhD in Fall 2027 to develop the next generation of uncertainty-aware perception frameworks for physical robots.
+            </p>
+            <p style="margin-top: 32px;">
+              <a href="resume.pdf" class="arrow-link" target="_blank" id="about-resume">
+                <span>View Resume (PDF)</span>
+                <span style="font-family: var(--font-sans);">→</span>
+              </a>
+            </p>
+          </div>
+          <div class="about-photo-wrapper">
+            <div class="about-photo">
+              <img src="assets2/presentation.jpg" alt="Kaj presenting multi-agent LLM simulation research at NEJCS, with the Secret Hitler case study title slide projected behind him" id="about-photo-img">
+            </div>
+            <div class="about-photo-caption">
+              Presenting multi-agent simulation research at NEJCS, 2025.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: RESEARCH -->
+  <section id="research">
+    <div class="container-wide">
+      <h2>Research</h2>
+      <div class="research-grid">
+
+        <!-- Featured: Bolt Pose Estimation -->
+        <div class="project-card project-card--featured">
+          <h3 class="project-title">Uncertainty-aware perception for robotic EV battery disassembly</h3>
+          <div class="project-visual">
+            <iframe
+              src="assets2/posterior-comparison-interactive-ambiguous-004-nonambiguous-013.html"
+              title="Interactive posterior comparison showing ambiguous and non-ambiguous state estimates"
+              id="card1-posterior-interactive"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <p class="project-desc">
+            NSF RTG research investigating bimodal pose distributions under heavy occlusion. Implemented Sequential Neural Posterior Estimation (SNPE) inside an Isaac Sim environment to construct calibrated belief states for robotic tool alignment.
+          </p>
+          <div class="project-links link-row">
+            <a href="https://github.com/kajizora/battery-disassembly-snpe" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <span style="color: var(--border-color)">·</span>
+            <a href="#" target="_blank" rel="noopener noreferrer">Video Demo</a>
+          </div>
+        </div>
+
+        <!-- Card 2: Humanoid Autonomy -->
+        <div class="project-card">
+          <div class="project-visual project-visual--video">
+            <video src="assets2/G1-loop.mp4" poster="assets2/G1-poster.jpg"
+                   autoplay muted loop playsinline preload="metadata"
+                   aria-label="Unitree G1 humanoid holding a grocery bag beside an open car trunk during a live demo">
+            </video>
+          </div>
+          <h3 class="project-title">Unitree G1 grocery-loading autonomy</h3>
+          <p class="project-desc">
+            A full perception–estimation–policy–control loop on the Unitree G1: locate a grocery bag, navigate to it, grasp it, load it into a car, and return — all driven by calibrated state estimates that update with live feedback during each action.
+          </p>
+          <div class="pipeline" aria-label="System architecture: perception, estimation, policy, control">
+            <div class="pipeline-stage">
+              <span class="pipeline-stage-name">Perception</span>
+              <span class="pipeline-stage-detail">RGB-D · LiDAR · IMU</span>
+            </div>
+            <span class="pipeline-arrow" aria-hidden="true">→</span>
+            <div class="pipeline-stage">
+              <span class="pipeline-stage-name">Estimation</span>
+              <span class="pipeline-stage-detail">SLAM + Kalman-fused pose</span>
+            </div>
+            <span class="pipeline-arrow" aria-hidden="true">→</span>
+            <div class="pipeline-stage">
+              <span class="pipeline-stage-name">Policy</span>
+              <span class="pipeline-stage-detail">FoundationPose + SAM2 grasp</span>
+            </div>
+            <span class="pipeline-arrow" aria-hidden="true">→</span>
+            <div class="pipeline-stage">
+              <span class="pipeline-stage-name">Control</span>
+              <span class="pipeline-stage-detail">Closed-loop IK &amp; placement</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Secret Hitler Simulation -->
+        <div class="project-card">
+          <div class="project-visual">
+            <iframe src="secret-hitler-exchange/index.html" title="Animated exchange: an LLM agent's public speech diverging from its private reasoning, with group trust eroding in real time" loading="lazy" style="width:100%; height:100%; border:0; display:block;" scrolling="no"></iframe>
+          </div>
+          <h3 class="project-title">Multi-agent LLM simulation of Secret Hitler</h3>
+          <p class="project-desc">
+            Developed a simulation framework evaluating social deduction and deceptive behavior in large language models. Implemented private Chain-of-Thought reasoning alongside public communication channels to study emergent coordination.
+          </p>
+          <div class="project-links link-row">
+            <a href="https://github.com/kajizora/secret-hitler-simulation" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <span style="color: var(--border-color)">·</span>
+            <a href="https://doi.org/10.22195/nejcs.2025.1.1" target="_blank" rel="noopener noreferrer">Paper (NEJCS)</a>
+          </div>
+        </div>
+
+        <!-- Card 4: Image-conditioned posterior -->
+        <div class="project-card">
+          <div class="project-visual">
+            <img src="assets2/card4-posterior-triptych.png" alt="Three frames spanning a clear view, partial occlusion, and the bag out of frame. A conditional diffusion model's samples (green) over the bag center track the true Monte-Carlo posterior (gray) — tight blob, then elongated, then a ring of hypotheses — while a least-squares point estimate collapses to a single guess that lands where the bag is not." loading="lazy" style="object-fit: contain; background: var(--bg-color);">
+          </div>
+          <h3 class="project-title">Image-conditioned posterior diffusion</h3>
+          <p class="project-desc">
+            A conditional diffusion model trained to sample p(center&nbsp;|&nbsp;frame) over the bag's location from a single camera image. As the bag is occluded or leaves the view, its belief widens from a tight mode to a ring of hypotheses — matching the true Monte-Carlo posterior to within about a pixel of spread, where a least-squares estimate collapses to one impossible point. Calibration verified with simulation-based calibration.
+          </p>
+          <div class="project-links link-row">
+            <a href="https://github.com/kajizora/posterior-diffusion" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+
+        <!-- Card 5: Flow Matching -->
+        <div class="project-card">
+          <div class="project-visual">
+            <img src="assets2/card5-flow-matching-vf.gif" alt="Animated vector field showing continuous normalizing flow density transport" loading="lazy">
+          </div>
+          <h3 class="project-title">Flow matching from scratch</h3>
+          <p class="project-desc">
+            Implementation of Continuous Normalizing Flows (CNFs) using flow matching objectives. Evaluated alignment with MolmoBot action-head trajectory predictions for robotic trajectory smoothing.
+          </p>
+          <div class="project-links link-row">
+            <a href="https://github.com/kajizora/flow-matching-scratch" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: PUBLICATION -->
+  <section id="publications">
+    <div class="container">
+      <h2>Publication</h2>
+      <div class="citation-block">
+        <p class="citation-text">
+          Izora, K. H. (2025). Exploring the Potential of Large Language Models to Simulate Social Group Dynamics. <i>Northeast Journal of Complex Systems</i>, 7(1), 45-62.
+        </p>
+        <div class="citation-meta">
+          <span>First author</span>
+          <span>Invited conference presentation</span>
+          <span>~1,500 downloads</span>
+        </div>
+        <p>
+          <a href="https://doi.org/10.22195/nejcs.2025.1.1" class="arrow-link" target="_blank" id="pub-link">
+            <span>Read the paper</span>
+            <span style="font-family: var(--font-sans);">→</span>
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: COMMUNITY -->
+  <section id="community">
+    <div class="container">
+      <h2>Community</h2>
+      <div class="community-layout">
+        <div class="community-visual">
+          <img src="assets2/teaching.jpg" alt="Kaj teaching a hands-on coding workshop with students raising their hands to participate" loading="lazy" id="community-img">
+        </div>
+        <p>
+          I am committed to making robotics and computing research accessible to students from underrepresented backgrounds. As a volunteer instructor and mentor with local STEM outreach groups, I design hands-on curricula in microcontroller programming, physical prototyping, and simple kinematic control systems. My goal is to bridge the gap between academic theory and physical, tactile engineering experiences.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: FOOTER -->
+  <footer class="container-wide">
+    <div class="footer-links">
+      <a href="mailto:kaj@izora.com" id="footer-email">kaj@izora.com</a>
+      <a href="https://github.com/kajizora" target="_blank" rel="noopener noreferrer" id="footer-github">GitHub</a>
+      <a href="https://linkedin.com/in/kaj-izora" target="_blank" rel="noopener noreferrer" id="footer-linkedin">LinkedIn</a>
+      <a href="resume.pdf" target="_blank" id="footer-resume">Resume (PDF)</a>
+    </div>
+    <div class="footer-copyright">
+      &copy; 2026 Kaj Hansteen Izora
+    </div>
+  </footer>
+
+</body>
+</html>

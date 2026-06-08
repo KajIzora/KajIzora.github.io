@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#fafaf7" />
+
+  <!-- Grid overlay -->
+  <g stroke="#f4f4f0" stroke-width="1">
+    <line x1="0" y1="50" x2="320" y2="50" />
+    <line x1="0" y1="100" x2="320" y2="100" />
+    <line x1="0" y1="150" x2="320" y2="150" />
+    <line x1="80" y1="0" x2="80" y2="200" />
+    <line x1="160" y1="0" x2="160" y2="200" />
+    <line x1="240" y1="0" x2="240" y2="200" />
+  </g>
+
+  <!-- Flow chart nodes -->
+  
+  <!-- Perception Block -->
+  <rect x="15" y="75" width="60" height="50" rx="3" fill="#fafaf7" stroke="#1c1c1a" stroke-width="1.2" />
+  <text x="45" y="98" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#1c1c1a" text-anchor="middle">Perception</text>
+  <text x="45" y="112" font-family="Inter, sans-serif" font-size="7" fill="#5c5c56" text-anchor="middle">RGB-D + IMU</text>
+
+  <!-- Estimation Block -->
+  <rect x="90" y="75" width="65" height="50" rx="3" fill="#eef3ef" fill-opacity="0.7" stroke="#2e5036" stroke-width="1.5" />
+  <text x="122.5" y="98" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#2e5036" text-anchor="middle">Estimation</text>
+  <text x="122.5" y="112" font-family="Inter, sans-serif" font-size="7" fill="#2e5036" text-anchor="middle">Uncertainty</text>
+
+  <!-- Policy Block -->
+  <rect x="170" y="75" width="60" height="50" rx="3" fill="#fafaf7" stroke="#1c1c1a" stroke-width="1.2" />
+  <text x="200" y="98" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#1c1c1a" text-anchor="middle">Policy</text>
+  <text x="200" y="112" font-family="Inter, sans-serif" font-size="7" fill="#5c5c56" text-anchor="middle">Action Head</text>
+
+  <!-- Control Block -->
+  <rect x="245" y="75" width="60" height="50" rx="3" fill="#fafaf7" stroke="#1c1c1a" stroke-width="1.2" />
+  <text x="275" y="98" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#1c1c1a" text-anchor="middle">Control</text>
+  <text x="275" y="112" font-family="Inter, sans-serif" font-size="7" fill="#5c5c56" text-anchor="middle">Joint Torques</text>
+
+  <!-- Connections -->
+  <g stroke="#1c1c1a" stroke-width="1.2" fill="none">
+    <!-- Perception -> Estimation -->
+    <path d="M 75 100 L 90 100" />
+    <polygon points="90,100 85,97 85,103" fill="#1c1c1a" />
+
+    <!-- Estimation -> Policy -->
+    <path d="M 155 100 L 170 100" stroke="#2e5036" stroke-width="1.5" />
+    <polygon points="170,100 165,97 165,103" fill="#2e5036" />
+
+    <!-- Policy -> Control -->
+    <path d="M 230 100 L 245 100" />
+    <polygon points="245,100 240,97 240,103" fill="#1c1c1a" />
+  </g>
+
+  <!-- Feedback Loop -->
+  <path d="M 275 125 L 275 150 L 122.5 150 L 122.5 125" fill="none" stroke="#5c5c56" stroke-width="1" stroke-dasharray="3 2" />
+  <polygon points="122.5,125 120,130 125,130" fill="#5c5c56" />
+  <text x="198.75" y="146" font-family="Inter, sans-serif" font-size="7" fill="#5c5c56" text-anchor="middle">State Feedback</text>
+
+  <!-- Title / Label -->
+  <text x="15" y="35" font-family="Inter, sans-serif" font-size="8" font-weight="600" fill="#5c5c56">SYSTEM ARCHITECTURE: UNITREE G1 AUTONOMY PIPELINE</text>
+</svg>

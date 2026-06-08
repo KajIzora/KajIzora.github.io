@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#fafaf7" />
+
+  <!-- Layout lines -->
+  <line x1="106.6" y1="20" x2="106.6" y2="180" stroke="#e2e2da" stroke-width="1.2" stroke-dasharray="2 2" />
+  <line x1="213.3" y1="20" x2="213.3" y2="180" stroke="#e2e2da" stroke-width="1.2" stroke-dasharray="2 2" />
+
+  <!-- Icon 1: Continuous Normalizing Flow (CNF) -->
+  <g transform="translate(0, 0)">
+    <text x="53.3" y="32" font-family="Inter, sans-serif" font-size="8" font-weight="600" fill="#5c5c56" text-anchor="middle">CNF</text>
+    
+    <!-- Flow morphing from a line to a Gaussian peak -->
+    <path d="M 23 150 Q 53.3 150, 83 150" stroke="#5c5c56" stroke-width="1" stroke-dasharray="2 2" />
+    <path d="M 23 125 C 43 125, 48 100, 53.3 100 C 58 100, 63.3 125, 83 125" stroke="#2e5036" stroke-opacity="0.4" stroke-width="1" />
+    <path d="M 23 90 C 40 90, 45 50, 53.3 50 C 61 50, 66 90, 83 90" stroke="#2e5036" stroke-opacity="0.8" stroke-width="1.5" />
+    
+    <!-- Arrows showing warping -->
+    <g stroke="#2e5036" stroke-width="0.8" fill="#2e5036" opacity="0.6">
+      <path d="M 33 120 L 33 98" /> <polygon points="33,98 31,102 35,102" />
+      <path d="M 53.3 92 L 53.3 58" /> <polygon points="53.3,58 51.3,62 55.3,62" />
+      <path d="M 73 120 L 73 98" /> <polygon points="73,98 71,102 75,102" />
+    </g>
+  </g>
+
+  <!-- Icon 2: Transformer Self-Attention Grid -->
+  <g transform="translate(106.6, 0)">
+    <text x="53.3" y="32" font-family="Inter, sans-serif" font-size="8" font-weight="600" fill="#5c5c56" text-anchor="middle">TRANSFORMER</text>
+    
+    <!-- Grid -->
+    <g transform="translate(18, 48)" stroke="#e2e2da" stroke-width="0.8" fill="none">
+      <!-- 7x7 grid blocks -->
+      <rect x="0" y="0" width="70" height="70" stroke="#1c1c1a" stroke-width="1" />
+      
+      <!-- Grid cells -->
+      <line x1="10" y1="0" x2="10" y2="70" />
+      <line x1="20" y1="0" x2="20" y2="70" />
+      <line x1="30" y1="0" x2="30" y2="70" />
+      <line x1="40" y1="0" x2="40" y2="70" />
+      <line x1="50" y1="0" x2="50" y2="70" />
+      <line x1="60" y1="0" x2="60" y2="70" />
+      
+      <line x1="0" y1="10" x2="70" y2="10" />
+      <line x1="0" y1="20" x2="70" y2="20" />
+      <line x1="0" y1="30" x2="70" y2="30" />
+      <line x1="0" y1="40" x2="70" y2="40" />
+      <line x1="0" y1="50" x2="70" y2="50" />
+      <line x1="0" y1="60" x2="70" y2="60" />
+      
+      <!-- Attention weight activations (Filled squares) -->
+      <rect x="0" y="0" width="10" height="10" fill="#2e5036" fill-opacity="0.8" stroke="none" />
+      <rect x="10" y="10" width="10" height="10" fill="#2e5036" fill-opacity="0.5" stroke="none" />
+      <rect x="20" y="20" width="10" height="10" fill="#2e5036" fill-opacity="0.9" stroke="none" />
+      <rect x="30" y="30" width="10" height="10" fill="#2e5036" fill-opacity="0.4" stroke="none" />
+      <rect x="40" y="40" width="10" height="10" fill="#2e5036" fill-opacity="0.85" stroke="none" />
+      <rect x="50" y="50" width="10" height="10" fill="#2e5036" fill-opacity="0.3" stroke="none" />
+      <rect x="60" y="60" width="10" height="10" fill="#2e5036" fill-opacity="0.75" stroke="none" />
+      
+      <!-- Off-diagonal key relationships -->
+      <rect x="30" y="10" width="10" height="10" fill="#2e5036" fill-opacity="0.6" stroke="none" />
+      <rect x="50" y="20" width="10" height="10" fill="#2e5036" fill-opacity="0.4" stroke="none" />
+      <rect x="10" y="50" width="10" height="10" fill="#2e5036" fill-opacity="0.5" stroke="none" />
+    </g>
+    <text x="53.3" y="132" font-family="Inter, sans-serif" font-size="7" fill="#5c5c56" text-anchor="middle">Attention A</text>
+  </g>
+
+  <!-- Icon 3: Vector Fields / ODE ODE solver trajectories -->
+  <g transform="translate(213.3, 0)">
+    <text x="53.3" y="32" font-family="Inter, sans-serif" font-size="8" font-weight="600" fill="#5c5c56" text-anchor="middle">VECTORS &amp; ODEs</text>
+    
+    <!-- A spiral or curl vector field flow -->
+    <!-- Vector arrows -->
+    <g stroke="#2e5036" stroke-width="0.8" fill="#2e5036" opacity="0.5">
+      <path d="M 23 80 Q 38 65, 53.3 65" /> <polygon points="53.3,65 48.3,63 49.3,67" fill="#2e5036" />
+      <path d="M 33 110 Q 53.3 110, 68 125" /> <polygon points="68,125 63,122 65,126" fill="#2e5036" />
+      <path d="M 53.3 145 Q 68 135, 78 110" /> <polygon points="78,110 74,114 77,115" fill="#2e5036" />
+      
+      <!-- Circle trajectory -->
+      <circle cx="53.3" cy="100" r="30" stroke="#1c1c1a" stroke-width="1.2" stroke-dasharray="3 3" fill="none" stroke-opacity="0.4" />
+    </g>
+    
+    <!-- Integration trajectory -->
+    <path d="M 25 125 C 35 120, 45 105, 53.3 85 C 60 70, 75 60, 83 95" fill="none" stroke="#1c1c1a" stroke-width="1.2" />
+    <circle cx="25" cy="125" r="2.5" fill="#1c1c1a" />
+    <circle cx="83" cy="95" r="2.5" fill="#2e5036" />
+  </g>
+</svg>
