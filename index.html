@@ -24,7 +24,7 @@
         <div class="hero-text">
           <h1>Kaj Hansteen Izora</h1>
           <p class="hero-tagline">
-            Robotics researcher working on uncertainty-aware embodied intelligence — perception and inference systems for robots that maintain calibrated beliefs and transfer reliably from simulation to the real world.
+            Robotics researcher working on uncertainty-aware embodied intelligence — perception, manipulation, and inference systems for robots that maintain calibrated beliefs and transfer reliably from simulation to the real world.
           </p>
           <div class="link-row">
             <a href="https://github.com/KajIzora" target="_blank" rel="noopener noreferrer" id="hero-github">GitHub</a>
@@ -50,13 +50,13 @@
         <div class="about-content">
           <div class="about-text">
             <p>
-              I am an Associate Physical AI Engineer at Rose City Robotics, focusing on real-world robot learning and robust estimation. My research centers on Bayesian perception, simulation-based inference, and continuous normalizing flows to build robots that can reason under uncertainty.
+              A robot can't average over its doubts — at some point it has to reach for the thing. That's what hooked me on robotics. I am an Associate Physical AI Engineer at Rose City Robotics, focusing on real-world robot learning and robust estimation. My research centers on Bayesian perception, simulation-based inference, and continuous normalizing flows to build robots that can reason under uncertainty.
             </p>
             <p>
               Previously, I was a 2025 NSF RTG Fellow working on Bayesian state estimation for automated EV battery disassembly. I graduated with a B.S. in Science, Data Science, and Social Science (minor in Systems Science) from Portland State University in 2025, where my work on multi-agent LLM simulations was published in the <i>Northeast Journal of Complex Systems</i>. 
             </p>
             <p>
-              Looking forward, I plan to start my PhD in Fall 2027 to develop the next generation of uncertainty-aware perception frameworks for physical robots.
+              Looking forward, I plan to start a PhD in Fall 2027, continuing to build uncertainty-aware perception systems for physical robots.
             </p>
             <p style="margin-top: 32px;">
               <a href="resume.html" class="arrow-link" id="about-resume">
@@ -82,6 +82,9 @@
   <section id="research">
     <div class="container-wide">
       <h2>Research</h2>
+      <p style="max-width: var(--max-width-prose); margin: -16px 0 32px; color: var(--text-secondary);">
+        The common bet across all of this: simulation is where intelligent behavior can be grown and studied — from low-level pose posteriors to multi-agent social reasoning.
+      </p>
       <div class="research-grid">
 
         <!-- Featured: Bolt Pose Estimation -->
@@ -96,7 +99,7 @@
             ></iframe>
           </div>
           <p class="project-desc">
-            NSF RTG research investigating bimodal pose distributions under heavy occlusion. Implemented Sequential Neural Posterior Estimation (SNPE) inside an Isaac Sim environment to construct calibrated belief states for robotic tool alignment.
+            NSF RTG research investigating multi-modal pose distributions under heavy occlusion. Implemented Sequential Neural Posterior Estimation (SNPE) to construct calibrated belief states for robotic tool alignment, trained on 1M+ domain-randomized renders from a parallelized Isaac Sim pipeline.
           </p>
         </div>
 
@@ -110,7 +113,7 @@
           </div>
           <h3 class="project-title">Unitree G1 grocery-loading autonomy</h3>
           <p class="project-desc">
-            A full perception–estimation–policy–control loop on the Unitree G1: locate a grocery bag, navigate to it, grasp it, load it into a car, and return — all driven by calibrated state estimates that update with live feedback during each action.
+            A full perception–estimation–policy–control loop on the Unitree G1: locate a grocery bag, navigate to it, grasp it, load it into a car, and return — all driven by calibrated state estimates that update with live feedback during each action. 97% task success across 100+ live conference trials.
           </p>
           <div class="pipeline" aria-label="System architecture: perception, estimation, policy, control">
             <div class="pipeline-stage">
@@ -124,7 +127,7 @@
             </div>
             <span class="pipeline-arrow" aria-hidden="true">→</span>
             <div class="pipeline-stage">
-              <span class="pipeline-stage-name">Policy</span>
+              <span class="pipeline-stage-name">Grasping</span>
               <span class="pipeline-stage-detail">FoundationPose + SAM2 grasp</span>
             </div>
             <span class="pipeline-arrow" aria-hidden="true">→</span>
@@ -142,7 +145,7 @@
           </div>
           <h3 class="project-title">Multi-agent LLM simulation of Secret Hitler</h3>
           <p class="project-desc">
-            Developed a simulation framework evaluating social deduction and deceptive behavior in large language models. Implemented private Chain-of-Thought reasoning alongside public communication channels to study emergent coordination.
+            A multi-agent simulation with a dual-layer architecture separating private chain-of-thought from public speech — measuring the gap between what agents intend and what they say. Used to study emergent coordination, deception, and theory-of-mind reasoning in LLMs.
           </p>
           <div class="project-links link-row">
             <a href="https://github.com/KajIzora/SecretHitler-LLM-Simulation-Code" target="_blank" rel="noopener noreferrer">GitHub</a>
