@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kaj Hansteen Izora — Robotics & Embodied AI Researcher</title>
+  <title>Kaj Hansteen Izora · Robotics & Embodied AI Researcher</title>
   <meta name="description" content="Personal portfolio and research website of Kaj Hansteen Izora, a robotics researcher focusing on uncertainty-aware embodied intelligence, simulation-based inference, and robot perception.">
   
   <!-- Font Imports -->
@@ -24,7 +24,7 @@
         <div class="hero-text">
           <h1>Kaj Hansteen Izora</h1>
           <p class="hero-tagline">
-            Robotics researcher working on uncertainty-aware embodied intelligence — perception, manipulation, and inference systems for robots that maintain calibrated beliefs and transfer reliably from simulation to the real world.
+            Robotics researcher working on uncertainty-aware embodied intelligence: perception, manipulation, and inference systems for robots that maintain calibrated beliefs and transfer reliably from simulation to the real world.
           </p>
           <div class="link-row">
             <a href="https://github.com/KajIzora" target="_blank" rel="noopener noreferrer" id="hero-github">GitHub</a>
@@ -83,7 +83,7 @@
     <div class="container-wide">
       <h2>Research</h2>
       <p>
-        The common bet across all of this: simulation is where intelligent behavior can be grown and studied — from low-level pose posteriors to multi-agent social reasoning.
+        The common bet across all of this: simulation is where intelligent behavior can be grown and studied, from low-level pose posteriors to multi-agent social reasoning.
       </p>
       <div class="research-grid">
 
@@ -134,7 +134,7 @@
             </div>
           </div>
           <p class="project-desc">
-            A full perception–estimation–policy–control loop on the Unitree G1: locate a grocery bag, navigate to it, grasp it, load it into a car, and return — all driven by calibrated state estimates that update with live feedback during each action. 97% task success across 100+ live conference trials.
+            A full perception–estimation–policy–control loop on the Unitree G1: locate a grocery bag, navigate to it, grasp it, load it into a car, and return, all driven by calibrated state estimates that update with live feedback during each action. 97% task success across 100+ trials.
           </p>
         </div>
 
@@ -145,7 +145,7 @@
             <iframe src="secret-hitler-exchange/index.html" title="Animated exchange: an LLM agent's public speech diverging from its private reasoning, with group trust eroding in real time" loading="lazy" style="width:100%; height:100%; border:0; display:block;" scrolling="no"></iframe>
           </div>
           <p class="project-desc">
-            A multi-agent simulation with a dual-layer architecture separating private chain-of-thought from public speech — measuring the gap between what agents intend and what they say. Used to study emergent coordination, deception, and theory-of-mind reasoning in LLMs.
+            A multi-agent simulation with a dual-layer architecture separating private chain-of-thought from public speech, measuring the gap between what agents intend and what they say. Used to study emergent coordination, deception, and theory-of-mind reasoning in LLMs.
           </p>
           <div class="project-links link-row">
             <a href="https://github.com/KajIzora/SecretHitler-LLM-Simulation-Code" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -158,10 +158,10 @@
         <div class="project-card">
           <h3 class="project-title">Image-conditioned posterior diffusion</h3>
           <div class="project-visual">
-            <img src="assets2/card4-posterior-triptych.png" alt="Three frames spanning a clear view, partial occlusion, and the bag out of frame. A conditional diffusion model's samples (green) over the bag center track the true Monte-Carlo posterior (gray) — tight blob, then elongated, then a ring of hypotheses — while a least-squares point estimate collapses to a single guess that lands where the bag is not." loading="lazy" style="object-fit: contain; background: var(--bg-color);">
+            <img src="assets2/card4-posterior-triptych.png" alt="Three frames spanning a clear view, partial occlusion, and the bag out of frame. A conditional diffusion model's samples (green) over the bag center track the true Monte-Carlo posterior (gray): tight blob, still tight under partial occlusion, then a broad ring once the bag leaves the frame. A least-squares point estimate collapses to a single guess that lands where the bag is not." loading="lazy" style="object-fit: contain; background: var(--bg-color);">
           </div>
           <p class="project-desc">
-            A conditional diffusion model trained to sample p(center&nbsp;|&nbsp;frame) over the bag's location from a single camera image. As the bag is occluded or leaves the view, its belief widens from a tight mode to a ring of hypotheses — matching the true Monte-Carlo posterior to within about a pixel of spread, where a least-squares estimate collapses to one impossible point. Calibration verified with simulation-based calibration.
+            A conditional diffusion model trained to sample p(center&nbsp;|&nbsp;frame) over the bag's location from a single camera image. Its belief stays a tight mode while the image pins the bag down, holding even under partial occlusion. That belief fans out into a ring of hypotheses once the bag's center leaves the frame, matching the true Monte-Carlo posterior to within about a pixel of spread. A least-squares estimate, by contrast, collapses to one impossible point. Calibration verified with simulation-based calibration.
           </p>
           <div class="project-links link-row">
             <a href="https://github.com/KajIzora/posterior-diffusion" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -175,7 +175,7 @@
             <img src="assets2/card5-flow-matching-vf.gif" alt="Animated vector field showing continuous normalizing flow density transport" loading="lazy">
           </div>
           <p class="project-desc">
-            Continuous normalizing flows and flow matching built from first principles — hand-coded vector fields, ODE integration, and flow-matching objectives. The same objective behind the action head in Ai2's MolmoBot.
+            Continuous normalizing flows and flow matching built from first principles: hand-coded vector fields, ODE integration, and flow-matching objectives.
           </p>
           <div class="project-links link-row">
             <a href="https://github.com/KajIzora/flow-matching-scratch" target="_blank" rel="noopener noreferrer">GitHub</a>
