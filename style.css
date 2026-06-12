@@ -216,6 +216,17 @@ a:hover {
 }
 
 /* Research Section */
+#research > .container-wide > h2 {
+  text-align: center;
+}
+
+#research > .container-wide > p {
+  max-width: var(--max-width-prose);
+  margin: -16px auto 32px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
 .research-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -340,16 +351,23 @@ a:hover {
   line-height: 1.4;
 }
 
+.project-card:not(.project-card--featured) .project-title {
+  text-align: center;
+}
+
 .project-desc {
   font-size: 16px;
   line-height: 1.5;
   color: var(--text-secondary);
   margin-bottom: 16px;
-  flex-grow: 1;
+}
+
+.project-desc:has(+ .project-links) {
+  margin-bottom: 8px;
 }
 
 .project-links {
-  margin-top: auto;
+  margin-top: 0;
 }
 
 /* Citation / Publication Block */

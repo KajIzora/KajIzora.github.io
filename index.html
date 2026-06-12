@@ -82,7 +82,7 @@
   <section id="research">
     <div class="container-wide">
       <h2>Research</h2>
-      <p style="max-width: var(--max-width-prose); margin: -16px 0 32px; color: var(--text-secondary);">
+      <p>
         The common bet across all of this: simulation is where intelligent behavior can be grown and studied — from low-level pose posteriors to multi-agent social reasoning.
       </p>
       <div class="research-grid">
@@ -105,16 +105,13 @@
 
         <!-- Card 2: Humanoid Autonomy -->
         <div class="project-card">
+          <h3 class="project-title">Unitree G1 grocery-loading autonomy</h3>
           <div class="project-visual project-visual--video">
             <video src="assets2/G1-loop.mp4" poster="assets2/G1-poster.jpg"
                    autoplay muted loop playsinline preload="metadata"
                    aria-label="Unitree G1 humanoid holding a grocery bag beside an open car trunk during a live demo">
             </video>
           </div>
-          <h3 class="project-title">Unitree G1 grocery-loading autonomy</h3>
-          <p class="project-desc">
-            A full perception–estimation–policy–control loop on the Unitree G1: locate a grocery bag, navigate to it, grasp it, load it into a car, and return — all driven by calibrated state estimates that update with live feedback during each action. 97% task success across 100+ live conference trials.
-          </p>
           <div class="pipeline" aria-label="System architecture: perception, estimation, policy, control">
             <div class="pipeline-stage">
               <span class="pipeline-stage-name">Perception</span>
@@ -136,14 +133,17 @@
               <span class="pipeline-stage-detail">Closed-loop IK &amp; placement</span>
             </div>
           </div>
+          <p class="project-desc">
+            A full perception–estimation–policy–control loop on the Unitree G1: locate a grocery bag, navigate to it, grasp it, load it into a car, and return — all driven by calibrated state estimates that update with live feedback during each action. 97% task success across 100+ live conference trials.
+          </p>
         </div>
 
         <!-- Card 3: Secret Hitler Simulation -->
         <div class="project-card">
+          <h3 class="project-title">Multi-agent LLM simulation of Secret Hitler</h3>
           <div class="project-visual">
             <iframe src="secret-hitler-exchange/index.html" title="Animated exchange: an LLM agent's public speech diverging from its private reasoning, with group trust eroding in real time" loading="lazy" style="width:100%; height:100%; border:0; display:block;" scrolling="no"></iframe>
           </div>
-          <h3 class="project-title">Multi-agent LLM simulation of Secret Hitler</h3>
           <p class="project-desc">
             A multi-agent simulation with a dual-layer architecture separating private chain-of-thought from public speech — measuring the gap between what agents intend and what they say. Used to study emergent coordination, deception, and theory-of-mind reasoning in LLMs.
           </p>
@@ -156,10 +156,10 @@
 
         <!-- Card 4: Image-conditioned posterior -->
         <div class="project-card">
+          <h3 class="project-title">Image-conditioned posterior diffusion</h3>
           <div class="project-visual">
             <img src="assets2/card4-posterior-triptych.png" alt="Three frames spanning a clear view, partial occlusion, and the bag out of frame. A conditional diffusion model's samples (green) over the bag center track the true Monte-Carlo posterior (gray) — tight blob, then elongated, then a ring of hypotheses — while a least-squares point estimate collapses to a single guess that lands where the bag is not." loading="lazy" style="object-fit: contain; background: var(--bg-color);">
           </div>
-          <h3 class="project-title">Image-conditioned posterior diffusion</h3>
           <p class="project-desc">
             A conditional diffusion model trained to sample p(center&nbsp;|&nbsp;frame) over the bag's location from a single camera image. As the bag is occluded or leaves the view, its belief widens from a tight mode to a ring of hypotheses — matching the true Monte-Carlo posterior to within about a pixel of spread, where a least-squares estimate collapses to one impossible point. Calibration verified with simulation-based calibration.
           </p>
@@ -170,10 +170,10 @@
 
         <!-- Card 5: Flow Matching -->
         <div class="project-card">
+          <h3 class="project-title">Flow matching from scratch</h3>
           <div class="project-visual">
             <img src="assets2/card5-flow-matching-vf.gif" alt="Animated vector field showing continuous normalizing flow density transport" loading="lazy">
           </div>
-          <h3 class="project-title">Flow matching from scratch</h3>
           <p class="project-desc">
             Continuous normalizing flows and flow matching built from first principles — hand-coded vector fields, ODE integration, and flow-matching objectives. The same objective behind the action head in Ai2's MolmoBot.
           </p>
